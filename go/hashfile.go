@@ -47,9 +47,9 @@ const resetColour = "\033[0m"
 const textBoldWhite = "\033[1;37m"
 
 // American National Standards Institute (ANSI) background colour codes
-var bgRed = "\033[41m"
-var bgGreen = "\033[42m"
-var bgYellow = "\033[43m"
+const bgRed = "\033[41m"
+const bgGreen = "\033[42m"
+const bgYellow = "\033[43m"
 
 // Function to draw box with stars around a message
 func messageBox(message string, bgColour string) {
