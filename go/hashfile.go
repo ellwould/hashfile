@@ -25,7 +25,13 @@ SOFTWARE.
 package main
 
 import (
-        "fmt"
+	"crypto/sha256"
+	"crypto/sha512"
+	"encoding/hex"
+	"fmt"
+	"io"
+	"log"
+	"os"
 )
 
 // American National Standards Institute (ANSI) reset colour code
@@ -37,6 +43,41 @@ const textBoldWhite = "\033[1;37m"
 // American National Standards Institute (ANSI) background colour codes
 var bgRed = "\033[41m"
 var bgGreen = "\033[42m"
+
+// Function to compute hash of a file
+func checksumFile(rootDirPath string, fileName string, algorithmVersion string) string {
+
+	// Go introduced OpenRoot in version 1.24, it restricts file operations to a single directory
+	rootDir, err := os.OpenRoot(rootDirPath)
+	if err != nil {
+		log.Fatal("Directory path " + rootDirPath + " cannot be opened or does not exist")
+	}
+
+	defer rootDir.Close()
+
+	// Open the file
+	file, err := rootDir.Open(fileName)
+	if err != nil {
+		log.Fatal("File " + fileName + " cannot be opened or does not exist")
+	}
+
+	defer file.Close()
+
+	if algorithmVersion == "sha256" || algorithmVersion == "sha-256" || algorithmVersion == "SHA256" || algorithmVersion == "SHA-256" {
+		hash := sha256.New()
+		if _, err := io.Copy(hash, file); err != nil {
+			log.Fatal(err)
+		}
+		return hex.EncodeToString(hash.Sum(nil))
+	} else if algorithmVersion == "sha512" || algorithmVersion == "sha-512" || algorithmVersion == "SHA512" || algorithmVersion == "SHA-512" {
+		hash := sha512.New()
+		if _, err := io.Copy(hash, file); err != nil {
+			log.Fatal(err)
+		}
+		return hex.EncodeToString(hash.Sum(nil))
+	} else {
+	}
+}
 
 func main() {
 }
