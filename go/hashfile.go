@@ -44,6 +44,7 @@ func clearScreen() {
 const resetColour = "\033[0m"
 
 // American National Standards Institute (ANSI) text colour code
+const textBoldBlack = "\033[1;30m"
 const textBoldWhite = "\033[1;37m"
 
 // American National Standards Institute (ANSI) background colour codes
@@ -111,6 +112,7 @@ func main() {
 		fileName          string
 	)
 	clearScreen()
+	fmt.Print(textBoldBlack)
 	fmt.Println("")
 	fmt.Print("    Enter expected hash value for the file\n    [usally found inside a checksum file]: ")
 	fmt.Scan(&expectedHashValue)
@@ -124,5 +126,11 @@ func main() {
 	fmt.Print("    Enter the name of the file name: ")
 	fmt.Scan(&fileName)
 	fmt.Println("")
-	hashTheFile(rootDirPath, fileName, algorithmVersion)
+	fmt.Print(resetColour)
+	result := hashTheFile(rootDirPath, fileName, algorithmVersion)
+	if expectedHashValue == result {
+		messageBox("Hashes match!", bgGreen)
+	} else {
+		messageBox("WARNING: Hashes do not match!", bgRed)
+	}
 }
