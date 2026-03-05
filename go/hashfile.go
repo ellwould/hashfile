@@ -67,7 +67,7 @@ func messageBox(message string, bgColour string) {
 }
 
 // Function to compute hash of a file
-func checksumFile(rootDirPath string, fileName string, algorithmVersion string) string {
+func hashTheFile(rootDirPath string, fileName string, algorithmVersion string) string {
 
 	// Go introduced OpenRoot in version 1.24, it restricts file operations to a single directory
 	rootDir, err := os.OpenRoot(rootDirPath)
@@ -104,4 +104,25 @@ func checksumFile(rootDirPath string, fileName string, algorithmVersion string) 
 }
 
 func main() {
+	var (
+		expectedHashValue string
+		algorithmVersion  string
+		rootDirPath       string
+		fileName          string
+	)
+	clearScreen()
+	fmt.Println("")
+	fmt.Print("    Enter expected hash value for the file\n    [usally found inside a checksum file]: ")
+	fmt.Scan(&expectedHashValue)
+	fmt.Println("")
+	fmt.Print("    Enter the algorithm version [sha256/sha512]: ")
+	fmt.Scan(&algorithmVersion)
+	fmt.Println("")
+	fmt.Print("    Enter the directory path where the file to hash is located\n    or enter ./ to use current working directory: ")
+	fmt.Scan(&rootDirPath)
+	fmt.Println("")
+	fmt.Print("    Enter the name of the file name: ")
+	fmt.Scan(&fileName)
+	fmt.Println("")
+	hashTheFile(rootDirPath, fileName, algorithmVersion)
 }
