@@ -32,7 +32,13 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 )
+
+// Clear Screen Function
+func clearScreen() {
+	fmt.Print("\033[H\033[2J")
+}
 
 // American National Standards Institute (ANSI) reset colour code
 const resetColour = "\033[0m"
@@ -43,6 +49,22 @@ const textBoldWhite = "\033[1;37m"
 // American National Standards Institute (ANSI) background colour codes
 var bgRed = "\033[41m"
 var bgGreen = "\033[42m"
+var bgYellow = "\033[43m"
+
+// Function to draw box with stars around a message
+func messageBox(message string, bgColour string) {
+	clearScreen()
+	topBottomStar := strings.Repeat(" ✸", (len(message)/2)+6)
+	inbetweenSpace := strings.Repeat(" ", len(message)+8)
+	fmt.Print(bgColour + textBoldWhite)
+	fmt.Println(topBottomStar + " ")
+	fmt.Println(" ✸" + inbetweenSpace + "✸ ")
+	fmt.Println(" ✸    " + message + "    ✸ ")
+	fmt.Println(" ✸" + inbetweenSpace + "✸ ")
+	fmt.Println(topBottomStar + " ")
+	fmt.Print(resetColour)
+	os.Exit(0)
+}
 
 // Function to compute hash of a file
 func checksumFile(rootDirPath string, fileName string, algorithmVersion string) string {
@@ -50,7 +72,7 @@ func checksumFile(rootDirPath string, fileName string, algorithmVersion string) 
 	// Go introduced OpenRoot in version 1.24, it restricts file operations to a single directory
 	rootDir, err := os.OpenRoot(rootDirPath)
 	if err != nil {
-		log.Fatal("Directory path " + rootDirPath + " cannot be opened or does not exist")
+		messageBox("Directory path cannot be opened or does not exist", bgYellow)
 	}
 
 	defer rootDir.Close()
@@ -58,7 +80,7 @@ func checksumFile(rootDirPath string, fileName string, algorithmVersion string) 
 	// Open the file
 	file, err := rootDir.Open(fileName)
 	if err != nil {
-		log.Fatal("File " + fileName + " cannot be opened or does not exist")
+		messageBox("File cannot be opened or does not exist", bgYellow)
 	}
 
 	defer file.Close()
@@ -76,6 +98,8 @@ func checksumFile(rootDirPath string, fileName string, algorithmVersion string) 
 		}
 		return hex.EncodeToString(hash.Sum(nil))
 	} else {
+		messageBox("Algorithm Required!", bgYellow)
+		return ""
 	}
 }
 
