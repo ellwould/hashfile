@@ -7,6 +7,14 @@ A simple program wrote in Go to compare an expected hash to a files hash: suppor
 
 ---
 
+## Using hashfile:
+
+<br>
+
+![image](https://github.com/ellwould/hashfile/blob/main/image/hashfile.jpeg)
+
+---
+
 ## Checksums for hashfile GNU/Linux 64-bit executable
 
 SHA256 = c3c5b7e79052d0a67af82d4491760ad0645bc362a4767dded84727c5b65a6d3a
