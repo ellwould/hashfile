@@ -13,8 +13,6 @@ A simple program wrote in Go to compare an expected hash to a files hash: suppor
 
 ### Using hashfile:
 
-<br>
-
 ![image](https://github.com/ellwould/hashfile/blob/main/image/hashfile.jpeg)
 
 <br>
@@ -28,6 +26,18 @@ A simple program wrote in Go to compare an expected hash to a files hash: suppor
 ### If the hashes do not match this message is displayed:
 
 ![image](https://github.com/ellwould/hashfile/blob/main/image/hashes_do_not_match.jpeg)
+
+<br>
+
+### If the directory path cannot be opened or does not exist this message is displayed:
+
+![image](https://github.com/ellwould/hashfile/blob/main/image/directory_cannot_open.jpeg)
+
+<br>
+
+### If the file cannot be opened or does not exist this message is displayed:
+
+![image](https://github.com/ellwould/hashfile/blob/main/image/file_cannot_open.jpeg)
 
 <br>
 
