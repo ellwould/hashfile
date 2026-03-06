@@ -19,9 +19,15 @@ A simple program wrote in Go to compare an expected hash to a files hash: suppor
 
 <br>
 
-### If the hashes match this message displays:
+### If the hashes match this message is displayed:
 
 ![image](https://github.com/ellwould/hashfile/blob/main/image/hashes_match.jpeg)
+
+<br>
+
+### If the hashes do not match this message is displayed:
+
+![image](https://github.com/ellwould/hashfile/blob/main/image/hashes_do_not_match.jpeg)
 
 <br>
 
