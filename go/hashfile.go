@@ -51,19 +51,23 @@ const textBoldWhite = "\033[1;37m"
 const bgRed = "\033[41m"
 const bgGreen = "\033[42m"
 const bgYellow = "\033[43m"
+const bgBlue = "\033[46m"
+const bgMagenta = "\033[45m"
 
 // Function to draw box with stars around a message
 func messageBox(message string, bgColour string) {
 	clearScreen()
 	topBottomStar := strings.Repeat(" ✸", (len(message)/2)+6)
 	inbetweenSpace := strings.Repeat(" ", len(message)+8)
-	fmt.Print(bgColour + textBoldWhite)
-	fmt.Println(topBottomStar + " ")
-	fmt.Println(" ✸" + inbetweenSpace + "✸ ")
-	fmt.Println(" ✸    " + message + "    ✸ ")
-	fmt.Println(" ✸" + inbetweenSpace + "✸ ")
-	fmt.Println(topBottomStar + " ")
-	fmt.Print(resetColour)
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("     " + bgColour + textBoldWhite + topBottomStar + " " + resetColour)
+	fmt.Println("     " + bgColour + textBoldWhite + " ✸" + inbetweenSpace + "✸ " + resetColour)
+	fmt.Println("     " + bgColour + textBoldWhite + " ✸    " + message + "    ✸ " + resetColour)
+	fmt.Println("     " + bgColour + textBoldWhite + " ✸" + inbetweenSpace + "✸ " + resetColour)
+	fmt.Println("     " + bgColour + textBoldWhite + topBottomStar + " " + resetColour)
+	fmt.Println("")
+	fmt.Println("")
 	os.Exit(0)
 }
 
@@ -104,6 +108,15 @@ func hashTheFile(rootDirPath string, fileName string, algorithmVersion string) s
 	}
 }
 
+// Function to terminate the running program if a user types "exit" or "quit"
+func exit(value string) {
+	if value == "exit" || value == "quit" {
+		fmt.Print(resetColour)
+		clearScreen()
+		os.Exit(0)
+	}
+}
+
 func main() {
 	var (
 		expectedHashValue string
@@ -112,19 +125,42 @@ func main() {
 		fileName          string
 	)
 	clearScreen()
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃                                                                       ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃   ██╗  ██╗  █████╗  ███████╗ ██╗  ██╗ ███████╗ ██╗ ██╗      ███████╗  ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃   ██║  ██║ ██╔══██╗ ██╔════╝ ██║  ██║ ██╔════╝ ██║ ██║      ██╔════╝  ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃   ███████║ ███████║ ███████╗ ███████║ █████╗   ██║ ██║      █████╗    ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃   ██╔══██║ ██╔══██║ ╚════██║ ██╔══██║ ██╔══╝   ██║ ██║      ██╔══╝    ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃   ██║  ██║ ██║  ██║ ███████║ ██║  ██║ ██║      ██║ ███████╗ ███████╗  ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃   ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═╝      ╚═╝ ╚══════╝ ╚══════╝  ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃                                                                       ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃     Source code available at https://github.com/ellwould/hashfile     ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃                                                                       ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃            " + resetColour + bgBlue + textBoldWhite + "                                               " + resetColour + bgMagenta + textBoldWhite + "            ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃            " + resetColour + bgBlue + textBoldWhite + "  Type \"exit\" or \"quit\" to terminate hashfile  " + resetColour + bgMagenta + textBoldWhite + "            ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃            " + resetColour + bgBlue + textBoldWhite + "                                               " + resetColour + bgMagenta + textBoldWhite + "            ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┃                                                                       ┃ " + resetColour)
+	fmt.Println("     " + bgMagenta + textBoldWhite + " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ " + resetColour)
+
 	fmt.Print(textBoldBlack)
 	fmt.Println("")
-	fmt.Print("    Enter expected hash value for the file\n    [usally found inside a checksum file]: ")
+	fmt.Print("         Enter expected hash value for the file\n         [usally found inside a checksum file]: ")
 	fmt.Scan(&expectedHashValue)
+	exit(expectedHashValue)
 	fmt.Println("")
-	fmt.Print("    Enter the algorithm version [sha256/sha512]: ")
+	fmt.Print("         Enter the algorithm version [sha256/sha512]: ")
 	fmt.Scan(&algorithmVersion)
+	exit(algorithmVersion)
 	fmt.Println("")
-	fmt.Print("    Enter the directory path where the file to hash is located\n    or enter ./ to use current working directory: ")
+	fmt.Print("         Enter the directory path where the file to hash is located\n         or enter ./ to use current working directory: ")
 	fmt.Scan(&rootDirPath)
+	exit(rootDirPath)
 	fmt.Println("")
-	fmt.Print("    Enter the name of the file name: ")
+	fmt.Print("         Enter the name of the file name: ")
 	fmt.Scan(&fileName)
+	exit(fileName)
 	fmt.Println("")
 	fmt.Print(resetColour)
 	result := hashTheFile(rootDirPath, fileName, algorithmVersion)
@@ -134,3 +170,6 @@ func main() {
 		messageBox("WARNING: Hashes do not match!", bgRed)
 	}
 }
+
+// Contributor(s):
+// Elliot Michael Keavney
