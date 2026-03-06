@@ -60,6 +60,13 @@ fi;
 
 #----------------------------------------------------------------------
 
+# Install wget
+
+apt update;
+apt install wget;
+
+#----------------------------------------------------------------------
+
 # Remove any previous version of Go, download and install Go 1.26.0
 
 printf $clear_screen;
@@ -106,3 +113,38 @@ else
 fi;
 
 #----------------------------------------------------------------------
+
+# Create Go directories in root home directory for compiling the source code
+
+mkdir -p /root/go/{bin,pkg,src/hashfile};
+
+# Copy hashfile source code
+
+cp /root/hashfile/go/hashfile.go /root/go/src/hashfile/hashfile.go;
+
+# Create Go mod for hashfile
+
+cd /root/go/src/hashfile;
+go mod init root/go/src/hashfile;
+go mod tidy;
+
+# Compile hashfile.go
+
+cd /root/go/src/hashfile;
+go build hashfile.go;
+
+# Move hashfile binary
+mv /root/go/src/hashfile/hashfile /usr/bin/hashfile;
+
+# Change directroy to /root
+cd /root;
+
+#----------------------------------------------------------------------
+
+printf $bg_green;
+printf $text_bold_white;
+printf " ╔════════════════════════════════╗ \n";
+printf " ║ hashfile installed in /usr/bin ║ \n";
+printf " ║ type \"hashfile\" to run         ║ \n";
+printf " ╚════════════════════════════════╝ \n";
+printf $reset_colour;
