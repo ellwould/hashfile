@@ -122,8 +122,9 @@ mkdir -p /root/go/{bin,pkg,src/hashfile};
 
 cp /root/hashfile/go/hashfile.go /root/go/src/hashfile/hashfile.go;
 
-# Create Go mod for hashfile
+# Remove old go.mod and create a Go mod file for hashfile
 
+rm /root/go/src/hashfile/go.mod;
 cd /root/go/src/hashfile;
 go mod init root/go/src/hashfile;
 go mod tidy;
