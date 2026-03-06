@@ -90,13 +90,25 @@ func hashTheFile(rootDirPath string, fileName string, algorithmVersion string) s
 
 	defer file.Close()
 
-	if algorithmVersion == "sha256" || algorithmVersion == "sha-256" || algorithmVersion == "SHA256" || algorithmVersion == "SHA-256" {
+	if algorithmVersion == "224" || algorithmVersion == "sha224" || algorithmVersion == "sha-224" || algorithmVersion == "SHA224" {
+		hash := sha256.New224()
+		if _, err := io.Copy(hash, file); err != nil {
+			log.Fatal(err)
+		}
+		return hex.EncodeToString(hash.Sum(nil))
+	} else if algorithmVersion == "256" || algorithmVersion == "sha256" || algorithmVersion == "sha-256" || algorithmVersion == "SHA256" || algorithmVersion == "SHA-256" {
 		hash := sha256.New()
 		if _, err := io.Copy(hash, file); err != nil {
 			log.Fatal(err)
 		}
 		return hex.EncodeToString(hash.Sum(nil))
-	} else if algorithmVersion == "sha512" || algorithmVersion == "sha-512" || algorithmVersion == "SHA512" || algorithmVersion == "SHA-512" {
+	} else if algorithmVersion == "384" || algorithmVersion == "sha384" || algorithmVersion == "sha-384" || algorithmVersion == "SHA384" || algorithmVersion == "SHA-384" {
+		hash := sha512.New384()
+		if _, err := io.Copy(hash, file); err != nil {
+			log.Fatal(err)
+		}
+		return hex.EncodeToString(hash.Sum(nil))
+	} else if algorithmVersion == "512" || algorithmVersion == "sha512" || algorithmVersion == "sha-512" || algorithmVersion == "SHA512" || algorithmVersion == "SHA-512" {
 		hash := sha512.New()
 		if _, err := io.Copy(hash, file); err != nil {
 			log.Fatal(err)
@@ -150,7 +162,7 @@ func main() {
 	fmt.Scan(&expectedHashValue)
 	exit(expectedHashValue)
 	fmt.Println("")
-	fmt.Print("         Enter the algorithm version [sha256/sha512]: ")
+	fmt.Print("         Enter the algorithm version [sha224/sha256/sha384/sha512]: ")
 	fmt.Scan(&algorithmVersion)
 	exit(algorithmVersion)
 	fmt.Println("")
