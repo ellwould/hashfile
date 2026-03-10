@@ -45,11 +45,11 @@ A simple program wrote in Go to compare an expected hash to a files hash: suppor
 
 <br>
 
-## Checksums for hashfile GNU/Linux 64-bit executable
+## Checksums for hashfile GNU/Linux 64-bit executable (compiled using Go Version 1.26.0)
 
-SHA256 = 0a9a50b76933d43bb9ce793153c5e12a947ffd1b9739d33e59c42ded6601c9a2
+SHA256 = c3c5b7e79052d0a67af82d4491760ad0645bc362a4767dded84727c5b65a6d3a
 
-SHA512 = 5547d0062d46b6e88865e1976115abcaf5ed2c9919a5123ec857afe5217f5838a2aa0a440a90a657e3e1fd5c469aa1baa29442f9a441341b6091390902ccf067
+SHA512 = d5517a7ba45da53e14bbe4f1a4075004788c30cb4380c0146e62d8df3e472d71dd884f6cf41953ea8238ee0da63e292bd0cf67f11990bf328c98cfa6b5e870dc
 
 <br>
 
